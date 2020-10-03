@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "NODE_ENV='development' node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -23,7 +25,16 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.3",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^1.0.5"
+    "http-proxy-middleware": "^1.0.5",
+    "prettier": "^2.1.2"
   }
 }
