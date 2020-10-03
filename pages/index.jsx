@@ -1,17 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
-import NotificationsIcon from '@material-ui/icons/NotificationsNone';
-
-import Avatar from '../src/components/Avatar';
+import NotificationsBlock from '../src/components/NotificationsBlock';
 import Profile from '../src/components/Profile';
-import { selectUserInitials } from '../src/store/user/selectors';
 
 export const useHomeStyles = makeStyles({
   container: {
@@ -35,37 +29,15 @@ export const useHomeStyles = makeStyles({
     marginTop: 7,
     color: '#fff',
   },
-  notifications: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingRight: 5,
-    height: 40,
-
-    '& > *': {
-      marginRight: 20,
-    },
-    '&:last-child': {
-      marginRight: 0,
-    },
-  },
 });
 
 export default function Home() {
   const classes = useHomeStyles();
-  const userInitials = useSelector(selectUserInitials);
 
   return (
     <div className={classes.container}>
       <header className={classes.header}>
-        <div className={classes.notifications}>
-          <IconButton color="inherit" size="small">
-            <NotificationsIcon />
-          </IconButton>
-          <Divider orientation="vertical" />
-          <Avatar />
-          <Typography variant="subtitle2">{userInitials}</Typography>
-        </div>
+        <NotificationsBlock />
 
         <div>
           <Typography className={classes.headerTitle} variant="h5">
