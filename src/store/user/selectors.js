@@ -7,3 +7,10 @@ export const selectUserFullName = (state) => selectUserProfile(state).fullName;
 export const selectUserEmail = (state) => selectUserProfile(state).email;
 export const selectUserPhoneNumber = (state) => selectUserProfile(state).phoneNumber;
 export const selectUserAvatarUrl = (state) => selectUserProfile(state).avatarUrl;
+export const selectUserInitials = (state) => {
+  const fullName = selectUserFullName(state);
+  // find first whitespace and concat first letter of first name
+  const index = fullName.indexOf(' ') + 2;
+  // formate initials
+  return fullName.substr(0, index).concat('.');
+};

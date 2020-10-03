@@ -11,7 +11,7 @@ import NotificationsIcon from '@material-ui/icons/NotificationsNone';
 
 import Avatar from '../src/components/Avatar';
 import Profile from '../src/components/Profile';
-import { selectUserFullName } from '../src/store/user/selectors';
+import { selectUserInitials } from '../src/store/user/selectors';
 
 export const useHomeStyles = makeStyles({
   container: {
@@ -53,7 +53,7 @@ export const useHomeStyles = makeStyles({
 
 export default function Home() {
   const classes = useHomeStyles();
-  const userFullName = useSelector(selectUserFullName);
+  const userInitials = useSelector(selectUserInitials);
 
   return (
     <div className={classes.container}>
@@ -64,7 +64,7 @@ export default function Home() {
           </IconButton>
           <Divider orientation="vertical" />
           <Avatar />
-          <Typography variant="subtitle2">{userFullName}</Typography>
+          <Typography variant="subtitle2">{userInitials}</Typography>
         </div>
 
         <div>
