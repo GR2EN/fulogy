@@ -24,8 +24,14 @@ export const selectUserAvatarUrl = createSelector(
 
 export const selectUserInitials = (state) => {
   const fullName = selectUserFullName(state);
-  // find first whitespace and concat first letter of first name
-  const index = fullName.indexOf(' ') + 2;
+  // find first whitespace
+  let index = fullName.indexOf(' ');
+  // if fullName doesn't have whitespace return fullName as is
+  if (index !== -1) {
+    index += 2;
+  } else {
+    return fullName;
+  }
   // formate initials
   return fullName.substr(0, index).concat('.');
 };
