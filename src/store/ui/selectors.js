@@ -1,14 +1,30 @@
 /* eslint-disable implicit-arrow-linebreak */
+import { createSelector } from 'reselect';
+
 export const selectUi = (state) => state.ui;
 
-export const selectEditForm = (state) => selectUi(state).editForm;
-export const selectConfirmationDialog = (state) => selectUi(state).confirmationDialog;
-export const selectInfoDialog = (state) => selectUi(state).infoDialog;
+export const selectEditForm = createSelector([selectUi], (ui) => ui.editForm);
 
-export const selectEditFormVisibility = (state) => selectEditForm(state).isVisible;
-export const selectConfirmationDialogVisibility = (state) =>
-  selectConfirmationDialog(state).isVisible;
-export const selectInfoDialogVisibility = (state) => selectInfoDialog(state).isVisible;
+export const selectConfirmationDialog = createSelector([selectUi], (ui) => ui.confirmationDialog);
 
-export const selectConfirmationDialogUserProfile = (state) =>
-  selectConfirmationDialog(state).userProfile;
+export const selectInfoDialog = createSelector([selectUi], (ui) => ui.infoDialog);
+
+export const selectEditFormVisibility = createSelector(
+  [selectEditForm],
+  (editForm) => editForm.isVisible,
+);
+
+export const selectConfirmationDialogVisibility = createSelector(
+  [selectConfirmationDialog],
+  (confirmationDialog) => confirmationDialog.isVisible,
+);
+
+export const selectInfoDialogVisibility = createSelector(
+  [selectInfoDialog],
+  (infoDialog) => infoDialog.isVisible,
+);
+
+export const selectConfirmationDialogUserProfile = createSelector(
+  [selectConfirmationDialog],
+  (confirmationDialog) => confirmationDialog.userProfile,
+);
