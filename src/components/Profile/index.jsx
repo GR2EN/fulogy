@@ -14,7 +14,7 @@ import ConfirmationDialog from '../Dialog/ConfirmationDialog';
 import EditForm from './ProfileEditForm';
 import InfoDialog from '../Dialog/InfoDialog';
 import InfoList from './ProfileInfoList';
-import { selectUserProfile } from '../../store/user/selectors';
+import { selectUserFullName, selectUserAvatarUrl } from '../../store/user/selectors';
 import { selectEditFormVisibility } from '../../store/ui/selectors';
 import { openEditForm, closeEditForm } from '../../store/ui/actionCreators';
 
@@ -42,7 +42,8 @@ const Profile = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { fullName, avatarUrl } = useSelector(selectUserProfile);
+  const fullName = useSelector(selectUserFullName);
+  const avatarUrl = useSelector(selectUserAvatarUrl);
   const isEditFormVisible = useSelector(selectEditFormVisibility);
 
   const handleEditFormOpen = useCallback(() => {
