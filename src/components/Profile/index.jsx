@@ -3,23 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
-import EmailIcon from '@material-ui/icons/AlternateEmail';
-import PhoneIcon from '@material-ui/icons/Phone';
 
 import Avatar from '../Avatar';
 import ConfirmationDialog from '../Dialog/ConfirmationDialog';
-import EditForm from './EditForm';
+import EditForm from './ProfileEditForm';
 import InfoDialog from '../Dialog/InfoDialog';
+import InfoList from './ProfileInfoList';
 import { selectUserProfile } from '../../store/user/selectors';
 import { selectEditFormVisibility } from '../../store/ui/selectors';
 import { openEditForm, closeEditForm } from '../../store/ui/actionCreators';
@@ -48,7 +42,7 @@ const Profile = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { fullName, email, phoneNumber, avatarUrl } = useSelector(selectUserProfile);
+  const { fullName, avatarUrl } = useSelector(selectUserProfile);
   const isEditFormVisible = useSelector(selectEditFormVisibility);
 
   const handleEditFormOpen = useCallback(() => {
@@ -80,27 +74,7 @@ const Profile = () => {
       </Paper>
 
       <Paper className={classes.profileFooter}>
-        {isEditFormVisible ? (
-          <EditForm />
-        ) : (
-          <List disablePadding>
-            <ListItem>
-              <ListItemIcon>
-                <EmailIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary={email} />
-            </ListItem>
-
-            <Divider />
-
-            <ListItem>
-              <ListItemIcon>
-                <PhoneIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary={phoneNumber || 'Укажите номер телефона'} />
-            </ListItem>
-          </List>
-        )}
+        {isEditFormVisible ? <EditForm /> : <InfoList />}
       </Paper>
 
       <ConfirmationDialog />

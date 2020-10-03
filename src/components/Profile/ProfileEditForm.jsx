@@ -76,7 +76,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-const EditForm = () => {
+const ProfileEditForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -154,4 +154,4 @@ const EditForm = () => {
   );
 };
 
-export default EditForm;
+export default ProfileEditForm;
