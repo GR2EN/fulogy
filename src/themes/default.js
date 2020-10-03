@@ -127,7 +127,7 @@ const defaultTheme = createMuiTheme({
     MuiSvgIcon: {
       root: {
         fontSize: 36,
-      }
+      },
     },
     MuiOutlinedInput: {
       root: {

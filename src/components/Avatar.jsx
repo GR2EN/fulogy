@@ -19,7 +19,7 @@ const Avatar = ({ src, large, ...props }) => {
 
   return (
     <MuiAvatar className={large && classes.large} src={src} {...props}>
-      <img src="/assets/images/avatar_fallback.jpg" />
+      <img src="/assets/images/avatar_fallback.jpg" alt="user avatar" />
     </MuiAvatar>
   );
 };

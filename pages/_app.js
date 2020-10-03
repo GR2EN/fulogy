@@ -16,7 +16,7 @@ class _App extends App {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);

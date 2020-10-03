@@ -1,6 +1,6 @@
 import * as actionTypes from './contracts/actionTypes';
 
-const initialState = { 
+const initialState = {
   editForm: {
     isVisible: false,
   },
@@ -14,7 +14,7 @@ const initialState = {
 };
 
 const ui = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.OPEN_EDIT_FORM: {
       return {
         ...state,
@@ -75,7 +75,8 @@ const ui = (state = initialState, action) => {
         },
       };
     }
-    default: return state;
+    default:
+      return state;
   }
 };
 

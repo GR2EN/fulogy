@@ -13,38 +13,6 @@ import Avatar from '../src/components/Avatar';
 import Profile from '../src/components/Profile';
 import { selectUserFullName } from '../src/store/user/selectors';
 
-export default function Home() {
-  const classes = useHomeStyles();
-  const userFullName = useSelector(selectUserFullName);
-
-  return (
-    <div className={classes.container}>
-      <header className={classes.header}>
-        <div className={classes.notifications}>
-          <IconButton color="inherit" size="small">
-            <NotificationsIcon />
-          </IconButton>
-          <Divider orientation="vertical" />
-          <Avatar />
-          <Typography variant="subtitle2">{userFullName}</Typography>
-        </div>
-
-        <div>
-          <Typography className={classes.headerTitle} variant="h5">ЛИЧНЫЙ ПРОФИЛЬ</Typography>
-          <Breadcrumbs className={classes.headerNav}>
-            <Typography color="inherit" variant="subtitle1">Главная</Typography>
-            <Typography color="inherit" variant="subtitle1">Личный профиль</Typography>
-          </Breadcrumbs>
-        </div>
-      </header>
-
-      <main>
-        <Profile />
-      </main>
-    </div>
-  );
-};
-
 export const useHomeStyles = makeStyles({
   container: {
     background: 'url("/assets/images/header_bg.jpg")',
@@ -82,3 +50,41 @@ export const useHomeStyles = makeStyles({
     },
   },
 });
+
+export default function Home() {
+  const classes = useHomeStyles();
+  const userFullName = useSelector(selectUserFullName);
+
+  return (
+    <div className={classes.container}>
+      <header className={classes.header}>
+        <div className={classes.notifications}>
+          <IconButton color="inherit" size="small">
+            <NotificationsIcon />
+          </IconButton>
+          <Divider orientation="vertical" />
+          <Avatar />
+          <Typography variant="subtitle2">{userFullName}</Typography>
+        </div>
+
+        <div>
+          <Typography className={classes.headerTitle} variant="h5">
+            ЛИЧНЫЙ ПРОФИЛЬ
+          </Typography>
+          <Breadcrumbs className={classes.headerNav}>
+            <Typography color="inherit" variant="subtitle1">
+              Главная
+            </Typography>
+            <Typography color="inherit" variant="subtitle1">
+              Личный профиль
+            </Typography>
+          </Breadcrumbs>
+        </div>
+      </header>
+
+      <main>
+        <Profile />
+      </main>
+    </div>
+  );
+}

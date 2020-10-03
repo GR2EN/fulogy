@@ -22,16 +22,33 @@ import EditForm from './EditForm';
 import InfoDialog from '../Dialog/InfoDialog';
 import { selectUserProfile } from '../../store/user/selectors';
 import { selectEditFormVisibility } from '../../store/ui/selectors';
-import {
-  openEditForm,
-  closeEditForm,
-} from '../../store/ui/actionCreators';
+import { openEditForm, closeEditForm } from '../../store/ui/actionCreators';
+
+const useStyles = makeStyles({
+  profileHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 24,
+    paddingRight: 22,
+    paddingBottom: 24,
+    paddingLeft: 30,
+    backgroundColor: '#1a78c2',
+    color: '#fff',
+  },
+  profileName: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  profileNameText: { marginLeft: 42 },
+  profileFooter: { marginTop: 24 },
+});
 
 const Profile = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { fullName, email, phoneNumber, avatarUrl} = useSelector(selectUserProfile);
+  const { fullName, email, phoneNumber, avatarUrl } = useSelector(selectUserProfile);
   const isEditFormVisible = useSelector(selectEditFormVisibility);
 
   const handleEditFormOpen = useCallback(() => {
@@ -47,7 +64,9 @@ const Profile = () => {
       <Paper className={classes.profileHeader}>
         <div className={classes.profileName}>
           <Avatar src={avatarUrl} large />
-          <Typography className ={classes.profileNameText} variant="h4">{fullName}</Typography>
+          <Typography className={classes.profileNameText} variant="h4">
+            {fullName}
+          </Typography>
         </div>
         {isEditFormVisible ? (
           <Button color="inherit" endIcon={<CloseIcon />} onClick={handleEditFormClose}>
@@ -59,7 +78,7 @@ const Profile = () => {
           </Button>
         )}
       </Paper>
-      
+
       <Paper className={classes.profileFooter}>
         {isEditFormVisible ? (
           <EditForm />
@@ -78,42 +97,16 @@ const Profile = () => {
               <ListItemIcon>
                 <PhoneIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={phoneNumber ? phoneNumber : 'Укажите номер телефона' } />
+              <ListItemText primary={phoneNumber || 'Укажите номер телефона'} />
             </ListItem>
           </List>
         )}
       </Paper>
 
       <ConfirmationDialog />
-      <InfoDialog>
-        Данные успешно сохранены
-      </InfoDialog>
+      <InfoDialog>Данные успешно сохранены</InfoDialog>
     </section>
   );
 };
-
-const useStyles = makeStyles({
-  profileHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 24,
-    paddingRight: 22,
-    paddingBottom: 24,
-    paddingLeft: 30,
-    backgroundColor: '#1a78c2',
-    color: '#fff',
-  },
-  profileName: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  profileNameText: {
-    marginLeft: 42,
-  },
-  profileFooter: {
-    marginTop: 24,
-  },
-});
 
 export default Profile;

@@ -8,14 +8,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { closeConfirmationDialog } from '../../store/ui/actionCreators';
 import { fetchSaveUser } from '../../store/user/actionCreators';
 import {
   selectConfirmationDialogVisibility,
-  selectConfirmationDialogUserProfile
+  selectConfirmationDialogUserProfile,
 } from '../../store/ui/selectors';
 
-import CloseIcon from '@material-ui/icons/Close';
+const useStyles = makeStyles({
+  closeButton: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+  },
+  actionButton: {
+    width: 200,
+    height: 50,
+  },
+});
 
 const ConfirmationDialog = () => {
   const classes = useStyles();
@@ -25,11 +36,11 @@ const ConfirmationDialog = () => {
 
   const handleClose = () => {
     dispatch(closeConfirmationDialog());
-  }
+  };
 
   const handleConfirm = () => {
     dispatch(fetchSaveUser(userProfile));
-  }
+  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -38,9 +49,7 @@ const ConfirmationDialog = () => {
       </IconButton>
 
       <DialogContent style={{ paddingTop: 68 }}>
-        <DialogContentText style={{ marginBottom: 22 }}>
-          Сохранить изменения?
-        </DialogContentText>
+        <DialogContentText style={{ marginBottom: 22 }}>Сохранить изменения?</DialogContentText>
 
         <DialogActions disableSpacing>
           <Button
@@ -60,22 +69,10 @@ const ConfirmationDialog = () => {
           >
             Не сохранять
           </Button>
-      </DialogActions>
+        </DialogActions>
       </DialogContent>
     </Dialog>
   );
 };
-
-const useStyles = makeStyles(({ spacing }) => ({
-  closeButton: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-  },
-  actionButton: {
-    width: 200,
-    height: 50,
-  },
-}));
 
 export default ConfirmationDialog;

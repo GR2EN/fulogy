@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const user = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.FETCH_SAVE_USER: {
       return {
         ...state,
@@ -24,14 +24,15 @@ const user = (state = initialState, action) => {
         ...state,
         profile: {
           ...state.profile,
-          fullName: fullName,
-          email: email,
-          phoneNumber: phoneNumber,
+          fullName,
+          email,
+          phoneNumber,
         },
         isLoading: false,
       };
     }
-    default: return state;
+    default:
+      return state;
   }
 };
 

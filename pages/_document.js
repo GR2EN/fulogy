@@ -10,7 +10,10 @@ class _Document extends Document {
       <Html>
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+          />
         </Head>
         <body>
           <Main />
@@ -21,13 +24,13 @@ class _Document extends Document {
   }
 }
 
-_Document.getInitialProps = async ctx => {
+_Document.getInitialProps = async (ctx) => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
   ctx.renderPage = () => originalRenderPage({
-    enhanceApp: WrappedComponent => props => sheets.collect(<WrappedComponent {...props} />),
-  });
+      enhanceApp: (WrappedComponent) => (props) => sheets.collect(<WrappedComponent {...props} />),
+    });
 
   const initialProps = await Document.getInitialProps(ctx);
 

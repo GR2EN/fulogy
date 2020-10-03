@@ -17,6 +17,8 @@ function* fetchSaveUserRequest({ payload }) {
   }
 }
 
-export function* userSaga() {
+function* userSaga() {
   yield takeEvery(actionTypes.FETCH_SAVE_USER, fetchSaveUserRequest);
 }
+
+export default userSaga;

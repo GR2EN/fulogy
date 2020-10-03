@@ -3,18 +3,21 @@
     "browser": true,
     "es2015": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "airbnb"
-  ],
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended", "airbnb"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2015,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": {}
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "no-console": "off",
+    "object-curly-newline": "off",
+    "no-control-regex": "off"
+  }
 }

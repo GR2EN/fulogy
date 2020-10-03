@@ -10,6 +10,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import { closeInfoDialog } from '../../store/ui/actionCreators';
 import { selectInfoDialogVisibility } from '../../store/ui/selectors';
 
+const useStyles = makeStyles({
+  actionButton: {
+    width: 200,
+    height: 50,
+  },
+});
+
 const InfoDialog = ({ children }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -17,14 +24,12 @@ const InfoDialog = ({ children }) => {
 
   const handleClose = () => {
     dispatch(closeInfoDialog());
-  }
+  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent style={{ paddingTop: 83 }}>
-        <DialogContentText style={{ marginBottom: 32 }}>
-          {children}
-        </DialogContentText>
+        <DialogContentText style={{ marginBottom: 32 }}>{children}</DialogContentText>
 
         <DialogActions>
           <Button
@@ -35,17 +40,10 @@ const InfoDialog = ({ children }) => {
           >
             Хорошо
           </Button>
-      </DialogActions>
+        </DialogActions>
       </DialogContent>
     </Dialog>
   );
 };
-
-const useStyles = makeStyles({
-  actionButton: {
-    width: 200,
-    height: 50,
-  },
-});
 
 export default InfoDialog;

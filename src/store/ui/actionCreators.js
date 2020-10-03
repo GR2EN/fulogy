@@ -4,7 +4,7 @@ export const openEditForm = () => ({
   type: actionTypes.OPEN_EDIT_FORM,
 });
 
-export const openConfirmationDialog = payload => ({
+export const openConfirmationDialog = (payload) => ({
   type: actionTypes.OPEN_CONFIRMATION_DIALOG,
   payload,
 });

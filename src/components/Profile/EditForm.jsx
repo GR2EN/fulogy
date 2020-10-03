@@ -19,111 +19,25 @@ import { openConfirmationDialog } from '../../store/ui/actionCreators';
 const phoneNumberRegExp = /^((\+7|7|8)+([0-9]){10})$|\b\d{3}[-.]?\d{3}[-.]?\d{4}/;
 const ProfileSchema = Yup.object().shape({
   fullName: Yup.string().required('Поле необходимо заполнить'),
-  email: Yup.string().email('Вы неверно указали адрес электронной почты').required('Поле необходимо заполнить'),
-  phoneNumber: Yup.string().matches(phoneNumberRegExp, 'Вы неверно указали номер телефона').required('Поле необходимо заполнить'),
+  email: Yup.string()
+    .email('Вы неверно указали адрес электронной почты')
+    .required('Поле необходимо заполнить'),
+  phoneNumber: Yup.string()
+    .matches(phoneNumberRegExp, 'Вы неверно указали номер телефона')
+    .required('Поле необходимо заполнить'),
 });
 
-const renderField = props => {
-  return (
-    <TextField
-      color="secondary"
-      fullWidth
-      variant="outlined"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      {...props}
-    />
-  );
-};
-
-const EditForm = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const { fullName, email, phoneNumber } = useSelector(selectUserProfile);
-
-  const handleSubmit = ({ fullName, email, phoneNumber }) => {
-    const user = { fullName, email, phoneNumber };
-    dispatch(openConfirmationDialog(user));
-  }
-
-  return (
-    <Formik
-      initialValues={{
-        fullName: fullName,
-        email: email,
-        phoneNumber: phoneNumber,
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        handleSubmit(values);
-        setSubmitting(false);
-      }}
-      validationSchema={ProfileSchema}
-    >
-      {({ submitForm, isSubmitting }) => (
-        <Form className={classes.form}>
-          <ul className={classes.formInputList}>
-            <li>
-              <Hidden mdDown>
-                <AccountIcon color="primary" style={{ marginRight: 42 }} />
-              </Hidden>
-              <Field
-                component={renderField}
-                label="Фамилия и имя"
-                name="fullName"
-                placeholder="Укажите ваши фамилию и имя"
-                type="text"
-              />
-            </li>
-
-            <Hidden mdDown>
-              <Divider orientation="vertical" style={{ marginLeft: 76, marginRight: 28 }} />
-            </Hidden>
-
-            <li>
-              <Hidden mdDown>
-                <EmailIcon color="primary" style={{ marginRight: 42 }} />
-              </Hidden>
-              <Field
-                component={renderField}
-                label="E-mail"
-                name="email"
-                type="email"
-              />
-            </li>
-
-            <Hidden mdDown>
-              <Divider orientation="vertical" style={{ marginLeft: 76, marginRight: 28 }} />
-            </Hidden>
-
-            <li>
-              <Hidden mdDown>
-                <PhoneIcon color="primary" style={{ marginRight: 42 }} />
-              </Hidden>
-              <Field
-                component={renderField}
-                label="Номер телефона"
-                name="phoneNumber"
-                placeholder="Укажите номер телефона"
-                type="tel"
-              />
-            </li>
-          </ul>
-
-          <Button
-            color="primary"
-            disabled={isSubmitting}
-            onClick={submitForm}
-            variant="contained"
-          >
-            Сохранить изменения
-          </Button>
-        </Form>
-      )}
-    </Formik>
-  );
-};
+const renderField = (props) => (
+  <TextField
+    color="secondary"
+    fullWidth
+    variant="outlined"
+    InputLabelProps={{
+      shrink: true,
+    }}
+    {...props}
+  />
+);
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   form: {
@@ -161,5 +75,83 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     },
   },
 }));
+
+const EditForm = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const { fullName, email, phoneNumber } = useSelector(selectUserProfile);
+
+  const handleSubmit = (values) => {
+    const user = { ...values };
+    dispatch(openConfirmationDialog(user));
+  };
+
+  return (
+    <Formik
+      initialValues={{
+        fullName,
+        email,
+        phoneNumber,
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        handleSubmit(values);
+        setSubmitting(false);
+      }}
+      validationSchema={ProfileSchema}
+    >
+      {({ submitForm, isSubmitting }) => (
+        <Form className={classes.form}>
+          <ul className={classes.formInputList}>
+            <li>
+              <Hidden mdDown>
+                <AccountIcon color="primary" style={{ marginRight: 42 }} />
+              </Hidden>
+              <Field
+                component={renderField}
+                label="Фамилия и имя"
+                name="fullName"
+                placeholder="Укажите ваши фамилию и имя"
+                type="text"
+              />
+            </li>
+
+            <Hidden mdDown>
+              <Divider orientation="vertical" style={{ marginLeft: 76, marginRight: 28 }} />
+            </Hidden>
+
+            <li>
+              <Hidden mdDown>
+                <EmailIcon color="primary" style={{ marginRight: 42 }} />
+              </Hidden>
+              <Field component={renderField} label="E-mail" name="email" type="email" />
+            </li>
+
+            <Hidden mdDown>
+              <Divider orientation="vertical" style={{ marginLeft: 76, marginRight: 28 }} />
+            </Hidden>
+
+            <li>
+              <Hidden mdDown>
+                <PhoneIcon color="primary" style={{ marginRight: 42 }} />
+              </Hidden>
+              <Field
+                component={renderField}
+                label="Номер телефона"
+                name="phoneNumber"
+                placeholder="Укажите номер телефона"
+                type="tel"
+              />
+            </li>
+          </ul>
+
+          <Button color="primary" disabled={isSubmitting} onClick={submitForm} variant="contained">
+            Сохранить изменения
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
 export default EditForm;
