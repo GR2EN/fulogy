@@ -1,4 +1,4 @@
-# Funlogy Test Task
+# Fulogy Test Task
 
 ## Commands
 
