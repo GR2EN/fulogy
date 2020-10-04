@@ -16,17 +16,41 @@ import {
   selectConfirmationDialogUserProfile,
 } from '../../store/ui/selectors';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(({ breakpoints }) => ({
+  dialogContent: {
+    marginTop: 60,
+
+    [breakpoints.down('xs')]: {
+      marginTop: 60,
+      paddingTop: 5,
+      paddingBottom: 160,
+    },
+  },
+  dialogActions: {
+    marginTop: 22,
+
+    [breakpoints.down('xs')]: {
+      marginTop: 30,
+    },
+  },
   closeButton: {
     position: 'absolute',
     top: 12,
     right: 12,
+
+    [breakpoints.down('xs')]: {
+      top: 8,
+      right: 8,
+    },
+  },
+  closeIcon: {
+    fontSize: 24,
   },
   actionButton: {
     width: 200,
     height: 50,
   },
-});
+}));
 
 const ConfirmationDialog = () => {
   const classes = useStyles();
@@ -45,18 +69,17 @@ const ConfirmationDialog = () => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <IconButton className={classes.closeButton} onClick={handleClose}>
-        <CloseIcon style={{ fontSize: 24 }} />
+        <CloseIcon className={classes.closeIcon} />
       </IconButton>
 
-      <DialogContent style={{ paddingTop: 68 }}>
-        <DialogContentText style={{ marginBottom: 22 }}>Сохранить изменения?</DialogContentText>
+      <DialogContent className={classes.dialogContent}>
+        <DialogContentText>Сохранить изменения?</DialogContentText>
 
-        <DialogActions disableSpacing>
+        <DialogActions className={classes.dialogActions} disableSpacing>
           <Button
             className={classes.actionButton}
             color="primary"
             onClick={handleConfirm}
-            style={{ marginBottom: 28 }}
             variant="contained"
           >
             Сохранить
@@ -66,6 +89,7 @@ const ConfirmationDialog = () => {
             color="primary"
             onClick={handleClose}
             variant="outlined"
+            style={{ marginTop: 28 }}
           >
             Не сохранять
           </Button>

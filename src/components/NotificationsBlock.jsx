@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
@@ -11,36 +12,63 @@ import NotificationsIcon from '@material-ui/icons/NotificationsNone';
 import Avatar from './Avatar';
 import { selectUserInitials } from '../store/user/selectors';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles(({ breakpoints }) => ({
   notifications: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingRight: 5,
+    margin: 0,
     height: 40,
+    listStyle: 'none',
 
-    '& > *': {
-      marginRight: 20,
+    [breakpoints.down('xs')]: {
+      height: 24,
     },
-    '&:last-child': {
-      marginRight: 0,
+
+    '& li': {
+      display: 'flex',
+      alignItems: 'center',
+      height: '100%',
+      marginRight: 20,
+
+      [breakpoints.down('xs')]: {
+        marginRight: 10,
+      },
+    },
+
+    '& li:last-child': {
+      marginRight: 25,
+
+      [breakpoints.down('xs')]: {
+        marginRight: 0,
+      },
     },
   },
-});
+}));
 
 const NotificationBlock = () => {
   const classes = useStyles();
   const userInitials = useSelector(selectUserInitials);
 
   return (
-    <div className={classes.notifications}>
-      <IconButton color="inherit" size="small">
-        <NotificationsIcon />
-      </IconButton>
-      <Divider orientation="vertical" />
-      <Avatar />
-      <Typography variant="subtitle2">{userInitials}</Typography>
-    </div>
+    <ul className={classes.notifications}>
+      <li>
+        <IconButton color="inherit" size="small">
+          <NotificationsIcon />
+        </IconButton>
+      </li>
+      <li>
+        <Divider orientation="vertical" />
+      </li>
+      <li>
+        <Avatar />
+      </li>
+      <Hidden xsDown>
+        <li>
+          <Typography variant="subtitle2">{userInitials}</Typography>
+        </li>
+      </Hidden>
+    </ul>
   );
 };
 

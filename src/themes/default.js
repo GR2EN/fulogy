@@ -24,13 +24,26 @@ const defaultTheme = createMuiTheme({
       fontSize: '1.875rem',
       fontWeight: 600,
       letterSpacing: '0.02em',
+
+      '@media (max-width: 599.95px)': {
+        fontSize: '0.875rem',
+        letterSpacing: 0,
+      },
     },
     h5: {
       fontSize: '1.125rem',
       fontWeight: 600,
+
+      '@media (max-width: 599.95px)': {
+        fontSize: '0.875rem',
+      },
     },
     subtitle1: {
       fontSize: '0.875rem',
+
+      '@media (max-width: 599.95px)': {
+        fontSize: '0.75rem',
+      },
     },
     subtitle2: {
       fontSize: '0.875rem',
@@ -38,6 +51,10 @@ const defaultTheme = createMuiTheme({
     },
     body1: {
       fontSize: '1.125rem',
+
+      '@media (max-width: 599.95px)': {
+        fontSize: '0.875rem',
+      },
     },
   },
   overrides: {
@@ -46,6 +63,11 @@ const defaultTheme = createMuiTheme({
         '& img': {
           width: '100%',
           height: '100%',
+        },
+
+        '@media (max-width: 599.95px)': {
+          width: 24,
+          height: 24,
         },
       },
     },
@@ -77,6 +99,25 @@ const defaultTheme = createMuiTheme({
         justifyContent: 'center',
         width: 600,
         height: 318,
+
+        '@media (max-width: 599.95px)': {
+          position: 'absolute',
+          margin: 0,
+          marginTop: 32,
+          width: '100%',
+          height: 'auto',
+          bottom: 0,
+          borderRadius: 22,
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
+        },
+      },
+    },
+    MuiDialogContent: {
+      root: {
+        '@media (max-width: 599.95px)': {
+          padding: 29,
+        },
       },
     },
     MuiDialogContentText: {
@@ -84,6 +125,11 @@ const defaultTheme = createMuiTheme({
         fontSize: '1.5rem',
         fontWeight: 600,
         color: 'rgba(49, 49, 49, 0.7)',
+
+        '@media (max-width: 599.95px)': {
+          fontSize: '1.125rem',
+          margin: 0,
+        },
       },
     },
     MuiDialogActions: {
@@ -97,14 +143,27 @@ const defaultTheme = createMuiTheme({
       root: {
         paddingTop: 30,
         paddingBottom: 30,
+
+        '@media (max-width: 599.95px)': {
+          paddingTop: 22,
+          paddingBottom: 22,
+        },
       },
       gutters: {
         paddingLeft: 75,
+
+        '@media (max-width: 599.95px)': {
+          paddingLeft: 12,
+        },
       },
     },
     MuiListItemIcon: {
       root: {
         minWidth: 75,
+
+        '@media (max-width: 599.95px)': {
+          minWidth: 36,
+        },
       },
     },
     MuiListItemText: {
@@ -127,6 +186,10 @@ const defaultTheme = createMuiTheme({
     MuiSvgIcon: {
       root: {
         fontSize: 36,
+
+        '@media (max-width: 599.95px)': {
+          fontSize: 24,
+        },
       },
     },
     MuiOutlinedInput: {

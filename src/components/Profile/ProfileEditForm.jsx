@@ -46,6 +46,13 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     paddingBottom: 44,
     paddingLeft: 30,
     textAlign: 'center',
+
+    [breakpoints.down('xs')]: {
+      paddingTop: 26,
+      paddingRight: 23,
+      paddingBottom: 17,
+      paddingLeft: 23,
+    },
   },
   formInputList: {
     display: 'flex',
@@ -56,7 +63,11 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     height: 97,
     listStyle: 'none',
 
-    '& > li': {
+    [breakpoints.down('xs')]: {
+      marginBottom: 26,
+    },
+
+    '& li': {
       display: 'flex',
       alignItems: 'center',
       height: '100%',
@@ -66,6 +77,10 @@ const useStyles = makeStyles(({ breakpoints }) => ({
         marginBottom: 30,
         width: '100%',
         height: 'auto',
+
+        '&:last-child': {
+          marginBottom: 0,
+        },
       },
     },
 

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -18,7 +20,7 @@ import { selectUserFullName, selectUserAvatarUrl } from '../../store/user/select
 import { selectEditFormVisibility } from '../../store/ui/selectors';
 import { openEditForm, closeEditForm } from '../../store/ui/actionCreators';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(({ breakpoints }) => ({
   profileHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -29,14 +31,33 @@ const useStyles = makeStyles({
     paddingLeft: 30,
     backgroundColor: '#1a78c2',
     color: '#fff',
+
+    [breakpoints.down('xs')]: {
+      paddingTop: 16,
+      paddingRight: 10,
+      paddingBottom: 15,
+      paddingLeft: 10,
+    },
   },
   profileName: {
     display: 'flex',
     alignItems: 'center',
   },
-  profileNameText: { marginLeft: 42 },
-  profileFooter: { marginTop: 24 },
-});
+  profileNameText: {
+    marginLeft: 42,
+
+    [breakpoints.down('xs')]: {
+      marginLeft: 10,
+    },
+  },
+  profileFooter: {
+    marginTop: 24,
+
+    [breakpoints.down('xs')]: {
+      marginTop: 10,
+    },
+  },
+}));
 
 const Profile = () => {
   const classes = useStyles();
@@ -64,13 +85,31 @@ const Profile = () => {
           </Typography>
         </div>
         {isEditFormVisible ? (
-          <Button color="inherit" endIcon={<CloseIcon />} onClick={handleEditFormClose}>
-            Закрыть
-          </Button>
+          <>
+            <Hidden xsDown>
+              <Button color="inherit" endIcon={<CloseIcon />} onClick={handleEditFormClose}>
+                Закрыть
+              </Button>
+            </Hidden>
+            <Hidden smUp>
+              <IconButton color="inherit" onClick={handleEditFormClose} size="small">
+                <CloseIcon />
+              </IconButton>
+            </Hidden>
+          </>
         ) : (
-          <Button color="inherit" endIcon={<EditIcon />} onClick={handleEditFormOpen}>
-            Редактировать
-          </Button>
+          <>
+            <Hidden xsDown>
+              <Button color="inherit" endIcon={<EditIcon />} onClick={handleEditFormOpen}>
+                Редактировать
+              </Button>
+            </Hidden>
+            <Hidden smUp>
+              <IconButton color="inherit" onClick={handleEditFormOpen} size="small">
+                <EditIcon />
+              </IconButton>
+            </Hidden>
+          </>
         )}
       </Paper>
 
